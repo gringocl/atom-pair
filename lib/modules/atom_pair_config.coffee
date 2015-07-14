@@ -12,4 +12,5 @@ module.exports = AtomPairConfig =
   missingPusherKeys: -> _.any([@app_key, @app_secret], @missing)
   missingHipChatKeys: -> _.any([@hc_key, @room_name], @missing)
   missingSlackWebHook: -> _.any([@slack_url], @missing)
+  missingFlowdockAPIToken: -> _.any([@flowdock_token], @missing)
   missing: (key) -> key is '' || typeof(key) is "undefined"

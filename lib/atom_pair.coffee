@@ -11,6 +11,7 @@ chunkString = null
 
 HipChatInvite = null
 SlackInvite = null
+FlowdockInvite = null
 Marker = null
 GrammarSync = null
 AtomPairConfig = null
@@ -45,6 +46,10 @@ module.exports = AtomPair =
       type: 'string'
       description: 'WebHook URL for Slack Incoming Webhook Integration'
       default: ''
+    flowdock_token:
+      type: 'string'
+      description: 'Flowdock API Token for sending invitations (optional)'
+      default: ''
 
   activate: (state) ->
     StartView = require './views/start-view'
@@ -57,6 +62,7 @@ module.exports = AtomPair =
 
     HipChatInvite = require './modules/hipchat_invite'
     SlackInvite = require './modules/slack_invite'
+    FlowdockInvite = require './modules/flowdock_invite'
     Marker = require './modules/marker'
     GrammarSync = require './modules/grammar_sync'
     AtomPairConfig = require './modules/atom_pair_config'
@@ -71,13 +77,14 @@ module.exports = AtomPair =
     @subscriptions.add atom.commands.add 'atom-workspace', 'AtomPair:join pairing session': => @joinSession()
     @subscriptions.add atom.commands.add 'atom-workspace', 'AtomPair:invite over hipchat': => @inviteOverHipChat()
     @subscriptions.add atom.commands.add 'atom-workspace', 'AtomPair:invite over slack': => @inviteOverSlack()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'AtomPair:invite over flowdock': => @inviteOverFlowdock()
     @subscriptions.add atom.commands.add '.session-id', 'AtomPair:copyid': => @copyId()
 
     @colours = require('./helpers/colour-list')
     @friendColours = []
     @timeouts = []
     @events = []
-    _.extend(@, HipChatInvite, SlackInvite, Marker, GrammarSync, AtomPairConfig, CustomPaste)
+    _.extend(@, HipChatInvite, SlackInvite, FlowdockInvite, Marker, GrammarSync, AtomPairConfig, CustomPaste)
 
   disconnect: ->
     @pusher.disconnect()
