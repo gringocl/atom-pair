@@ -1,5 +1,4 @@
 InputView = require '../views/input-view'
-AlertView = require '../views/alert-view'
 Flowdock = require 'flowdock'
 _ = require 'underscore'
 
@@ -9,9 +8,9 @@ module.exports = FlowdockInvite =
     @getKeysFromConfig()
 
     if @missingPusherKeys()
-      new AlertView "Please set your Pusher keys."
+      atom.notifications.addError("Please set your Pusher keys.")
     else if @missingFlowdockAPIToken()
-      new AlertView "Please set you Flowdock API token"
+      atom.notifications.addError("Please set you Flowdock API token")
     else
       inviteView = new InputView("Please enter the Flowdock mention name of your pair partner:")
       inviteView.miniEditor.focus()
@@ -24,7 +23,7 @@ module.exports = FlowdockInvite =
 
     # create flowdock client
     flowdockSession = Flowdock.Session
-    flowdockClient = new flowdockSession(@flowdock_token)
+    flowdockClient = new flowdockSession(@flowdock_keys)
 
     # generate sessionid
     @generateSessionId()
@@ -37,7 +36,7 @@ module.exports = FlowdockInvite =
       flowdockClient.privateMessage(collaborator, "Hello there #{collaborator}. You have been invited to a pairing session. If you haven't installed the AtomPair plugin, type \`apm install atom-pair\` into your terminal. Go onto Atom, hit 'Join a pairing session', and enter this string: #{@sessionId}")
 
       # alert user and pair setup
-      new AlertView "#{collaborator} has been send an invitation. Hold tight!"
+      atom.notifications.addInfo("#{collaborator} has been send an invitation. Hold tight!")
       @markerColour = @colours[0]
       @pairingSetup()
     )

@@ -43,9 +43,13 @@ module.exports = AtomPair =
       type: 'string'
       description: 'WebHook URL for Slack Incoming Webhook Integration'
       default: ''
-    flowdock_token:
+    flowdock_username:
       type: 'string'
-      description: 'Flowdock API Token for sending invitations (optional)'
+      description: 'Flowdock username for sending invitations (optional)'
+      default: ''
+    flowdock_password:
+      type: 'string'
+      description: 'Flowdock password for sending invitations (optional)'
       default: ''
 
   activate: (state) ->
