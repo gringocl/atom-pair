@@ -2,6 +2,14 @@
 
 Remote pairing within the [Atom.IO](http://atom.io) text editor, powered by Pusher.
 
+## Version 2.0.0
+
+* This major release allows users to share multiple tabs. Any new tabs open within a window where a pairing session is active will be synchronized across.
+* Hand-made notifications views have now been ditched in favour of using Atom's Notifications API.
+* Initiating a session automatically writes the session ID to your clipboard, allowing you to simply paste it to your partner.
+* Using autocomplete no longer leaves clients out of sync.
+
+
 ##How Do I Get Started?
 
 ###Install
@@ -23,7 +31,7 @@ As detailed below, there are two ways you can invite others. Given a [free](http
 
 Hit `command+shift+p`, and in the command palette, hit `AtomPair: Start A New Pairing Session`.
 
-You will be given a session ID, hit `command+c` and paste that to a friend.
+A session ID will be automatically copied to your clipboard.
 
 ![Basic Invite](https://raw.githubusercontent.com/pusher/atom-pair/master/images/invite.gif)
 
@@ -55,6 +63,8 @@ Once your partner has a session ID, they should go to the command pallette and h
 
 Once there are more than one of you in a session, your collaborators will be represented by a coloured marker in the gutter, which will changed position based on their selections and inputs.
 
+Any new files opened in that window will be automatically synced across, and you can work on different files at the same time.
+
 To end a pairing session, go to `AtomPair: Disconnect`, and you will be disconnected from Pusher, and the file will be free for you to save.
 
 ##Free And Open For Everyone
@@ -73,11 +83,6 @@ Here is a current list of features:
 * Collaborator visibility.
 
 But if there are any features you find lacking, feel more than welcome to [get in touch](<mailto:jamie@pusher.com>).
-
-## To Do
-
-* Allow sharing of whole directories.
-* Fix issues users have been having with snippets
 
 ## Credits
 
